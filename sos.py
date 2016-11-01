@@ -14,7 +14,6 @@ def S():
         time.sleep(0.5)
         off()
         time.sleep(0.4)
-        print("S: {}".format(i))
 
 def O():
     for i in range(3):
@@ -22,7 +21,6 @@ def O():
         time.sleep(1)
         off()
         time.sleep(0.4)
-        print("O: {}".format(i))
 
 if __name__ == "__main__":
     while True:
