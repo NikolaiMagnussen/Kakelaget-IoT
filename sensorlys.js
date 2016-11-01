@@ -22,16 +22,18 @@ var sensor = connected.then(function(tag) {
   return tag;
 });
 
+var lightOn = false
+
 sensor.then(function(tag) {
-  sensorTag.on('accelerometerChange', function(x, y, z) {
-    if(x < -2 || x > 2) {
-      log('\nMovement in x direction: ' + x);
-    }
-    if(y < -2 || y > 2) {
-      log('\nMovement in y direction: ' + y);
-    }
-    if(z < -2 || z > 2) {
-      log('\nMovement in z direction: ' + z);
+  tag.on('accelerometerChange', function(x, y, z) {
+    if(x < -2 || x > 2 || y < -2 || y > 2 || z < -2 || z > 2) {
+      if (lightOn) {
+        http.get("http://admin:WelcometoCX01@10.0.1.14:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_4-0-37/command/off")
+        lightOn = true
+      } else {
+        http.get("http://admin:WelcometoCX01@10.0.1.14:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_4-0-37/command/on")
+        lightOn = false
+      }
     }
   });
 });
