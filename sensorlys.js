@@ -29,6 +29,6 @@ var sensor = connected.then(function(tag) {
 
 sensor.then(function(tag) {
   tag.on("irTemperatureChange", function(objectTemp, ambientTemp) {
-	  log("Temp" + objectTemp);
+	  log("ObjTemp: " + objectTemp + " AmbTemp: " + ambientTemp);
   })
 });
