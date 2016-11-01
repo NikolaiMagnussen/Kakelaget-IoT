@@ -50,6 +50,10 @@ var sensor = connected.then(function(tag) {
 
   tag.enableGyroscope(log);
   tag.notifyGyroscope(log);
+
+  tag.enableAccelerometer(log);
+  tag.notifyAccelerometer(log);
+
   return tag;
 });
 
@@ -67,6 +71,14 @@ sensor.then(function(tag) {
       log("Don't slobber all over the SensorTag please...");
     }
     prev = humidity;
+  });
+});
+
+sensor.then(function(tag) {
+  sensorTag.on('accelerometerChange', function(x, y, z) {
+    console.log('\tx = %d G', x.toFixed(1));
+    console.log('\ty = %d G', y.toFixed(1));
+    console.log('\tz = %d G', z.toFixed(1));
   });
 });
 

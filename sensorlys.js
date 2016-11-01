@@ -16,19 +16,16 @@ var connected = new Promise((resolve, reject) =>
 var sensor = connected.then(function(tag) {
   log("connected");
 
-  tag.enableIrTemperature(log);
-  tag.notifyIrTemperature(log);
+  tag.enableAccelerometer(log);
+  tag.notifyAccelerometer(log);
 
-  tag.enableHumidity(log);
-  tag.notifyHumidity(log);
-
-  tag.enableGyroscope(log);
-  tag.notifyGyroscope(log);
   return tag;
 });
 
 sensor.then(function(tag) {
-  tag.on("irTemperatureChange", function(objectTemp, ambientTemp) {
-	  log("ObjTemp: " + objectTemp + " AmbTemp: " + ambientTemp);
-  })
+  sensorTag.on('accelerometerChange', function(x, y, z) {
+    console.log('\tx = %d G', x.toFixed(1));
+    console.log('\ty = %d G', y.toFixed(1));
+    console.log('\tz = %d G', z.toFixed(1));
+  });
 });
