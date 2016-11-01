@@ -24,8 +24,14 @@ var sensor = connected.then(function(tag) {
 
 sensor.then(function(tag) {
   sensorTag.on('accelerometerChange', function(x, y, z) {
-    console.log('\tx = %d G', x.toFixed(1));
-    console.log('\ty = %d G', y.toFixed(1));
-    console.log('\tz = %d G', z.toFixed(1));
+    if(x < -2 || x > 2) {
+      log('\nMovement in x direction: ' + x);
+    }
+    if(y < -2 || y > 2) {
+      log('\nMovement in y direction: ' + y);
+    }
+    if(z < -2 || z > 2) {
+      log('\nMovement in z direction: ' + z);
+    }
   });
 });
