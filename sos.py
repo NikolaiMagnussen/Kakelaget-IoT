@@ -20,8 +20,7 @@ def O():
         os.system("./wallplug.sh")
 
 if __name__ == "__main__":
-    while True:
-        S()
-        O()
-        S()
-        time.sleep(2)
+    S()
+    O()
+    S()
+    time.sleep(2)

@@ -28,7 +28,10 @@ var lightOn = false
 
 sensor.then(function(tag) {
   tag.on('accelerometerChange', function(x, y, z) {
-    if(x < -2 || x > 2 || y < -2 || y > 2 || z < -2 || z > 2) {
+    if (x < -4 || x > 4 || y < -4 || y > 4 || z < -4 || z > 4) {
+	    log("sos");
+	    var c = exec("./sos.py");
+    } else if(x < -2 || x > 2 || y < -2 || y > 2 || z < -2 || z > 2) {
       log("light toggle");
       if (lightOn) {
         http.get("http://admin:kake123@10.0.1.14:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_4-0-37/command/off");
@@ -37,10 +40,6 @@ sensor.then(function(tag) {
         http.get("http://admin:kake123@10.0.1.14:8083/ZAutomation/api/v1/devices/ZWayVDev_zway_4-0-37/command/on");
         lightOn = true;
       }
-    } else if (x < -4 || x > 4 || y < -4 || y > 4 || z < -4 || z > 4) {
-	    log("sos");
-	    var c = exec("./sos.py");
-	    c();
     }
   });
 });
